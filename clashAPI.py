@@ -1,6 +1,5 @@
 import requests
 import tkinter as tk
-import json
 # 165.155.164.16
 token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImQ5YjI1MWIzLTY5M2QtNGVhZS1iZTkxLTI3NmQxZjdlYjcyOSIsImlhdCI6MTc2NDE2ODAzNCwic3ViIjoiZGV2ZWxvcGVyLzIzYzBlM2JhLWQ1YmQtMzU5Zi1hM2NiLTliMzFiZjk0ZDM5YyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNjUuMTU1LjE2NC4xNiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.9AyyT7PJcwWUVZvYeb6eS_IpCTJOfyM6i49lM0byv80xLb-nRk3ku0UamzikhK6L_PTCG9GDJtvPpVk0IoWUtA"
 # 165.155.163.5
@@ -16,7 +15,8 @@ def getCardData(endpoint, name):
     data = response.json()
     # print(data['items'])
     for i in range(len(data["items"])):
-        if data["items"][i] == name:
-            cardid = [i]["id"]
-            return "https://api.clashroyale.com/v1" + endpoint + "/" + cardid, api_key
-getCardData(endpoint,"Knight")
+        if data["items"][i]["name"] == name:
+            return data["items"][i]
+            # cardid = str(data['items'][i]["id"])
+            # return ("https://api.clashroyale.com/v1" + endpoint + "/" + cardid, api_key)
+print(getCardData(endpoint,"Knight"))
