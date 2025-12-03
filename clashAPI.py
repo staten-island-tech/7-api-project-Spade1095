@@ -8,11 +8,11 @@ api_key = {"Authorization": f"Bearer {token}"}
 endpoint = "/cards"
 window = tk.Tk()
 def getInput():
-    input = inputEntry.get
+    input = inputEntry.get()
     return input
 def getCardData():
     found = False
-    name = getInput
+    name = getInput()
     print(f"Name : {name}")
     response = requests.get("https://api.clashroyale.com/v1" + endpoint, api_key)
     if response.status_code != 200:
@@ -32,7 +32,7 @@ def getCardData():
         print("test")
         nameLabel = tk.Label(window, text=f"Name: {data["name"]}").grid(column=2,row=2)
         elixirLabel = tk.Label(window, text=f"Elixir Cost: {data["elixirCost"]}").grid(column=2,row=3)
-        rarityLabel = tk.Lable(window, text=f"Rarity: {data["rarity"]}").grid(column=2,row=4)
+        rarityLabel = tk.Label(window, text=f"Rarity: {data["rarity"]}").grid(column=2,row=4)
 
 
 inputEntry = tk.Entry(window).grid(column=1,row=1)
