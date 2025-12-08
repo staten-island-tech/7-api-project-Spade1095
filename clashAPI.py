@@ -20,6 +20,7 @@ def getCardData():
         return None
     if response.status_code == 403:
         token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjhlZTU1MTg0LTg4MzQtNDI5ZC1iZTE5LTI3ODhhNWM2MjM0NyIsImlhdCI6MTc2NDE2ODEwMiwic3ViIjoiZGV2ZWxvcGVyLzIzYzBlM2JhLWQ1YmQtMzU5Zi1hM2NiLTliMzFiZjk0ZDM5YyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNjUuMTU1LjE2My41Il0sInR5cGUiOiJjbGllbnQifV19.qDGz1KhmbidyL0HsNEmoipsXDOFrZJhetbfOYlDb7sI9TW6VUsvkMAHJOMOIR8tRxRW0kq8VJEMxgtvyhxUibA"
+        api_key = {"Authorization": f"Bearer {token}"}
         response = requests.get("https://api.clashroyale.com/v1" + endpoint, api_key)
     data = response.json()
     for i in range(len(data["items"])):
