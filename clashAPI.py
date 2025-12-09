@@ -5,10 +5,14 @@ from io import BytesIO
 from tkinter import Label
 endpoint = "/cards"
 window = tk.Tk()
+data = []
+cardStatus = 1
 def getInput():
     input = inputEntry.get()
     return input
 def getCardData():
+    global data
+    global cardStatus
     name = getInput()
     token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImQ5YjI1MWIzLTY5M2QtNGVhZS1iZTkxLTI3NmQxZjdlYjcyOSIsImlhdCI6MTc2NDE2ODAzNCwic3ViIjoiZGV2ZWxvcGVyLzIzYzBlM2JhLWQ1YmQtMzU5Zi1hM2NiLTliMzFiZjk0ZDM5YyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNjUuMTU1LjE2NC4xNiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.9AyyT7PJcwWUVZvYeb6eS_IpCTJOfyM6i49lM0byv80xLb-nRk3ku0UamzikhK6L_PTCG9GDJtvPpVk0IoWUtA"
     api_key = {"Authorization": f"Bearer {token}"}
@@ -37,10 +41,62 @@ def getCardData():
                 photoLabel = Label(window, image=photo)
                 photoLabel.grid(column=1,row=2)
                 photoLabel.image = photo
+                evoButton = tk.Button(window, text = "Evolve",command=evo).grid(column=1,row=3)
+                heroButton = tk.Button(window, text = "Hero",command=hero).grid(column=1,row=4)
+                cardStatus = 1
             elif i == len(data["items"]) - 1:
                 print("card not found")
         except KeyError:
             continue
+def evo():
+    global cardStatus
+    if cardStatus != 2:
+        try:
+            imgResponse = requests.get(data["iconUrls"]["evolutionMedium"])
+            imgData = imgResponse.content
+            img = Image.open(BytesIO(imgData))
+            photo = ImageTk.PhotoImage(img)
+            photoLabel = Label(window, image=photo)
+            photoLabel.grid(column=1,row=2)
+            photoLabel.image = photo
+            cardStatus = 2
+        except KeyError:
+            print("Card does not have a evolution.")
+            return
+    else:
+        imgResponse = requests.get(data["iconUrls"]["medium"])
+        imgData = imgResponse.content
+        img = Image.open(BytesIO(imgData))
+        photo = ImageTk.PhotoImage(img)
+        photoLabel = Label(window, image=photo)
+        photoLabel.grid(column=1,row=2)
+        photoLabel.image = photo
+        cardStatus = 1
+def hero():
+    global cardStatus
+    if cardStatus != 3:
+        try:
+            imgResponse = requests.get(data["iconUrls"]["heroMedium"])
+            imgData = imgResponse.content
+            img = Image.open(BytesIO(imgData))
+            photo = ImageTk.PhotoImage(img)
+            photoLabel = Label(window, image=photo)
+            photoLabel.grid(column=1,row=2)
+            photoLabel.image = photo
+            cardStatus = 3
+        except KeyError:
+            print("Card does not have a hero.")
+            return
+    else:
+        imgResponse = requests.get(data["iconUrls"]["medium"])
+        imgData = imgResponse.content
+        img = Image.open(BytesIO(imgData))
+        photo = ImageTk.PhotoImage(img)
+        photoLabel = Label(window, image=photo)
+        photoLabel.grid(column=1,row=2)
+        photoLabel.image = photo
+        cardStatus = 1
+
 inputEntry = tk.Entry(window)
 inputEntry.grid(column=1,row=1)
 searchButton = tk.Button(window, text = "Search", command=getCardData).grid(column=2,row=1)
