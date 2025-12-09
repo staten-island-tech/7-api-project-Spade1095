@@ -7,6 +7,7 @@ endpoint = "/cards"
 window = tk.Tk()
 data = []
 cardStatus = 1
+tks = []
 def getInput():
     input = inputEntry.get()
     return input
@@ -43,7 +44,10 @@ def getCardData():
                 photoLabel.image = photo
                 evoButton = tk.Button(window, text = "Evolve",command=evo).grid(column=1,row=3)
                 heroButton = tk.Button(window, text = "Hero",command=hero).grid(column=1,row=4)
+                tks.append(nameLabel)
+                
                 cardStatus = 1
+
             elif i == len(data["items"]) - 1:
                 print("card not found")
         except KeyError:
