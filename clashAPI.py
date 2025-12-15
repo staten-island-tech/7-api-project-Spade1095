@@ -30,26 +30,24 @@ def getCardData():
         print("Error fetching data!")
         print(response)
         print(response.json())
-        # return None
+        return None
     if response.status_code == 403:
         token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjExMDBiMGJkLTViODItNDQ5Yi05ZGZmLWZiNzYwNDg5MmI3OSIsImlhdCI6MTc2NTQ2NTM1NCwic3ViIjoiZGV2ZWxvcGVyLzIzYzBlM2JhLWQ1YmQtMzU5Zi1hM2NiLTliMzFiZjk0ZDM5YyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNjUuMTU1LjE3Mi42Il0sInR5cGUiOiJjbGllbnQifV19.MVhP7qf_aF35xsXoANGc5lMo3prBPaHmD-IB0-aKkSGdP2rTiT0nGrWG3Rm6OukOvBkZFagwPJLnWbfnuk9B0g"
         api_key = {"Authorization": f"Bearer {token}"}
         response = requests.get("https://api.clashroyale.com/v1" + endpoint, api_key)
         print("IP number 2")
-        print(response.json())
     if response.status_code == 403:
         token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjA3MjFmN2VlLWY3NDctNDkwNy1hZGJlLWFlZDFhOTFkZWUzZSIsImlhdCI6MTc2NTU1MTM5Nywic3ViIjoiZGV2ZWxvcGVyLzIzYzBlM2JhLWQ1YmQtMzU5Zi1hM2NiLTliMzFiZjk0ZDM5YyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxNjUuMTU1LjE2MC43Il0sInR5cGUiOiJjbGllbnQifV19.hSMz9pJS8F7G0hzfgOXvDlUr-T6iCFQkrg5lAvDWPYqaVJysoYN_cJBNCUm_ORI5SxU5iwHnZ4OTVIkjOhfFvw"
         api_key = {"Authorization": f"Bearer {token}"}
         response = requests.get("https://api.clashroyale.com/v1" + endpoint, api_key)
         print("IP number 3")
-        print(response.json())
     data = response.json()
 
     # find data
     try:
         test = data["items"]
     except KeyError:
-        print('items doesnt exsit')
+        print('items doesnt exsit check if you got another IP adress')
     for i in range(len(data["items"])):
         try:
             if data["items"][i]["name"] == name:
