@@ -47,7 +47,7 @@ def getCardData():
     try:
         test = data["items"]
     except KeyError:
-        print('items doesnt exsit check if you got another IP adress')
+        print('items doesnt exsit check if you got another IP adress I hate this so much :(')
     for i in range(len(data["items"])):
         try:
             if data["items"][i]["name"] == name:
